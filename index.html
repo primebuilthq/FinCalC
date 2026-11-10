@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinCalC - Global Wealth & Finance Suite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🧮 FinCalC</a>
+        <nav>
+            <a href="#" onclick="switchTab('calc')" id="navCalc" class="active">Calculator</a>
+            <a href="#" onclick="switchTab('privacy')" id="navPrivacy">Privacy Policy</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- STEP 1: CALCULATOR VIEW -->
+        <div id="calculatorView" class="card">
+            <h1>Global Financial Suite</h1>
+            <p class="subtitle">Select your field, choose from all 194 world currencies, and calculate accurately.</p>
+
+            <div class="adsense-box">
+                <span>[ Google AdSense Header Display Slot ]</span>
+            </div>
+
+            <!-- Field Selection -->
+            <div class="input-group">
+                <label for="calcField">Select Financial Field</label>
+                <select id="calcField" onchange="updateFields()">
+                    <option value="salary">Hourly to Annual Salary Calculator</option>
+                    <option value="compound">Compound Interest & Wealth Growth</option>
+                    <option value="loan">Loan EMI & Mortgage Calculator</option>
+                </select>
+            </div>
+
+            <!-- All 194 World Currencies Dropdown -->
+            <div class="input-group">
+                <label for="targetCurrency">Display Output Currency (194 Currencies)</label>
+                <select id="targetCurrency">
+                    <option value="USD" selected>USD - US Dollar ($)</option>
+                    <option value="INR">INR - Indian Rupee (₹)</option>
+                    <option value="EUR">EUR - Euro (€)</option>
+                    <option value="GBP">GBP - British Pound (£)</option>
+                    <option value="CAD">CAD - Canadian Dollar ($)</option>
+                    <option value="AUD">AUD - Australian Dollar ($)</option>
+                    <option value="JPY">JPY - Japanese Yen (¥)</option>
+                    <option value="CHF">CHF - Swiss Franc (CHF)</option>
+                    <option value="CNY">CNY - Chinese Yuan (¥)</option>
+                    <option value="AED">AED - United Arab Emirates Dirham (AED)</option>
+                    <option value="AFN">AFN - Afghan Afghani (؋)</option>
+                    <option value="ALL">ALL - Albanian Lek (L)</option>
+                    <option value="AMD">AMD - Armenian Dram (֏)</option>
+                    <option value="ANG">ANG - Netherlands Antillean Guilder (ƒ)</option>
+                    <option value="AOA">AOA - Angolan Kwanza (Kz)</option>
+                    <option value="ARS">ARS - Argentine Peso ($)</option>
+                    <option value="AWG">AWG - Aruban Florin (ƒ)</option>
+                    <option value="AZN">AZN - Azerbaijani Manat (₼)</option>
+                    <option value="BAM">BAM - Bosnia-Herzegovina Convertible Mark (KM)</option>
+                    <option value="BBD">BBD - Barbadian Dollar ($)</option>
+                    <option value="BDT">BDT - Bangladeshi Taka (৳)</option>
+                    <option value="BGN">BGN - Bulgarian Lev (лв)</option>
+                    <option value="BHD">BHD - Bahraini Dinar (.د.ب)</option>
+                    <option value="BIF">BIF - Burundian Franc (FBu)</option>
+                    <option value="BMD">BMD - Bermudian Dollar ($)</option>
+                    <option value="BND">BND - Brunei Dollar ($)</option>
+                    <option value="BOB">BOB - Bolivian Boliviano (Bs.)</option>
+                    <option value="BRL">BRL - Brazilian Real (R$)</option>
+                    <option value="BSD">BSD - Bahamian Dollar ($)</option>
+                    <option value="BTN">BTN - Bhutanese Ngultrum (Nu.)</option>
+                    <option value="BWP">BWP - Botswanan Pula (P)</option>
+                    <option value="BYN">BYN - Belarusian Ruble (Br)</option>
+                    <option value="BZD">BZD - Belize Dollar (BZ$)</option>
+                    <option value="CDF">CDF - Congolese Franc (FC)</option>
+                    <option value="CLP">CLP - Chilean Peso ($)</option>
+                    <option value="COP">COP - Colombian Peso ($)</option>
+                    <option value="CRC">CRC - Costa Rican Colón (₡)</option>
+                    <option value="CUP">CUP - Cuban Peso ($)</option>
+                    <option value="CVE">CVE - Cape Verdean Escudo ($)</option>
+                    <option value="CZK">CZK - Czech Koruna (Kč)</option>
+                    <option value="DJF">DJF - Djiboutian Franc (Fdj)</option>
+                    <option value="DKK">DKK - Danish Krone (kr)</option>
+                    <option value="DOP">DOP - Dominican Peso (RD$)</option>
+                    <option value="DZD">DZD - Algerian Dinar (دج)</option>
+                    <option value="EGP">EGP - Egyptian Pound (£)</option>
+                    <option value="ERN">ERN - Eritrean Nakfa (Nfk)</option>
+                    <option value="ETB">ETB - Ethiopian Birr (Br)</option>
+                    <option value="FJD">FJD - Fijian Dollar ($)</option>
+                    <option value="FKP">FKP - Falkland Islands Pound (£)</option>
+                    <option value="GEL">GEL - Georgian Lari (₾)</option>
+                    <option value="GHS">GHS - Ghanaian Cedi (₵)</option>
+                    <option value="GIP">GIP - Gibraltar Pound (£)</option>
+                    <option value="GMD">GMD - Gambian Dalasi (D)</option>
+                    <option value="GNF">GNF - Guinean Franc (FG)</option>
+                    <option value="GTQ">GTQ - Guatemalan Quetzal (Q)</option>
+                    <option value="GYD">GYD - Guyanese Dollar ($)</option>
+                    <option value="HKD">HKD - Hong Kong Dollar ($)</option>
+                    <option value="HNL">HNL - Honduran Lempira (L)</option>
+                    <option value="HRK">HRK - Croatian Kuna (kn)</option>
+                    <option value="HTG">HTG - Haitian Gourde (G)</option>
+                    <option value="HUF">HUF - Hungarian Forint (Ft)</option>
+                    <option value="IDR">IDR - Indonesian Rupiah (Rp)</option>
+                    <option value="ILS">ILS - Israeli New Shekel (₪)</option>
+                    <option value="IQD">IQD - Iraqi Dinar (ع.د)</option>
+                    <option value="IRR">IRR - Iranian Rial (﷼)</option>
+                    <option value="ISK">ISK - Icelandic Króna (kr)</option>
+                    <option value="JMD">JMD - Jamaican Dollar (J$)</option>
+                    <option value="JOD">JOD - Jordanian Dinar (د.ا)</option>
+                    <option value="KES">KES - Kenyan Shilling (KSh)</option>
+                    <option value="KGS">KGS - Kyrgystani Som (с)</option>
+                    <option value="KHR">KHR - Cambodian Riel (៛)</option>
+                    <option value="KMF">KMF - Comorian Franc (CF)</option>
+                    <option value="KPW">KPW - North Korean Won (₩)</option>
+                    <option value="KRW">KRW - South Korean Won (₩)</option>
+                    <option value="KWD">KWD - Kuwaiti Dinar (KD)</option>
+                    <option value="KYD">KYD - Cayman Islands Dollar ($)</option>
+                    <option value="KZT">KZT - Kazakhstani Tenge (₸)</option>
+                    <option value="LAK">LAK - Laotian Kip (₭)</option>
+                    <option value="LBP">LBP - Lebanese Pound (ل.ل)</option>
+                    <option value="LKR">LKR - Sri Lankan Rupee (Rs)</option>
+                    <option value="LRD">LRD - Liberian Dollar ($)</option>
+                    <option value="LSL">LSL - Lesotho Loti (L)</option>
+                    <option value="LYD">LYD - Libyan Dinar (LD)</option>
+                    <option value="MAD">MAD - Moroccan Dirham (MAD)</option>
+                    <option value="MDL">MDL - Moldovan Leu (lei)</option>
+                    <option value="MGA">MGA - Malagasy Ariary (Ar)</option>
+                    <option value="MKD">MKD - Macedonian Denar (ден)</option>
+                    <option value="MMK">MMK - Myanmar Kyat (Ks)</option>
+                    <option value="MNT">MNT - Mongolian Tugrik (₮)</option>
+                    <option value="MOP">MOP - Macanese Pataca (MOP$)</option>
+                    <option value="MRU">MRU - Mauritanian Ouguiya (UM)</option>
+                    <option value="MUR">MUR - Mauritian Rupee (₨)</option>
+                    <option value="MVR">MVR - Maldivian Rufiyaa (Rf)</option>
+                    <option value="MWK">MWK - Malawian Kwacha (MK)</option>
+                    <option value="MXN">MXN - Mexican Peso ($)</option>
+                    <option value="MYR">MYR - Malaysian Ringgit (RM)</option>
+                    <option value="MZN">MZN - Mozambican Metical (MT)</option>
+                    <option value="NAD">NAD - Namibian Dollar ($)</option>
+                    <option value="NGN">NGN - Nigerian Naira (₦)</option>
+                    <option value="NIO">NIO - Nicaraguan Córdoba (C$)</option>
+                    <option value="NOK">NOK - Norwegian Krone (kr)</option>
+                    <option value="NPR">NPR - Nepalese Rupee (रू)</option>
+                    <option value="NZD">NZD - New Zealand Dollar ($)</option>
+                    <option value="OMR">OMR - Omani Rial (ر.ع.)</option>
+                    <option value="PAB">PAB - Panamanian Balboa (B/.)</option>
+                    <option value="PEN">PEN - Peruvian Sol (S/)</option>
+                    <option value="PGK">PGK - Papua New Guinean Kina (K)</option>
+                    <option value="PHP">PHP - Philippine Peso (₱)</option>
+                    <option value="PKR">PKR - Pakistani Rupee (₨)</option>
+                    <option value="PLN">PLN - Polish Zloty (zł)</option>
+                    <option value="PYG">PYG - Paraguayan Guarani (₲)</option>
+                    <option value="QAR">QAR - Qatari Riyal (ر.ق)</option>
+                    <option value="RON">RON - Romanian Leu (lei)</option>
+                    <option value="RSD">RSD - Serbian Dinar (din)</option>
+                    <option value="RUB">RUB - Russian Ruble (₽)</option>
+                    <option value="RWF">RWF - Rwandan Franc (FRw)</option>
+                    <option value="SAR">SAR - Saudi Riyal (ر.س)</option>
+                    <option value="SBD">SBD - Solomon Islands Dollar ($)</option>
+                    <option value="SCR">SCR - Seychellois Rupee (₨)</option>
+                    <option value="SDG">SDG - Sudanese Pound (ج.س.)</option>
+                    <option value="SEK">SEK - Swedish Krona (kr)</option>
+                    <option value="SGD">SGD - Singapore Dollar ($)</option>
+                    <option value="SHP">SHP - Saint Helena Pound (£)</option>
+                    <option value="SLL">SLL - Sierra Leonean Leone (Le)</option>
+                    <option value="SOS">SOS - Somali Shilling (S)</option>
+                    <option value="SRD">SRD - Surinamese Dollar ($)</option>
+                    <option value="SSP">SSP - South Sudanese Pound (£)</option>
+                    <option value="STN">STN - São Tomé and Príncipe Dobra (Db)</option>
+                    <option value="SYP">SYP - Syrian Pound (£)</option>
+                    <option value="SZL">SZL - Eswatini Lilangeni (E)</option>
+                    <option value="THB">THB - Thai Baht (฿)</option>
+                    <option value="TJS">TJS - Tajikistani Somoni (SM)</option>
+                    <option value="TMT">TMT - Turkmenistani Manat (T)</option>
+                    <option value="TND">TND - Tunisian Dinar (د.ت)</option>
+                    <option value="TOP">TOP - Tongan Paʻanga (T$)</option>
+                    <option value="TRY">TRY - Turkish Lira (₺)</option>
+                    <option value="TTD">TTD - Trinidad and Tobago Dollar (TT$)</option>
+                    <option value="TWD">TWD - New Taiwan Dollar (NT$)</option>
+                    <option value="TZS">TZS - Tanzanian Shilling (TSh)</option>
+                    <option value="UAH">UAH - Ukrainian Hryvnia (₴)</option>
+                    <option value="UGX">UGX - Ugandan Shilling (USh)</option>
+                    <option value="UYU">UYU - Uruguayan Peso ($U)</option>
+                    <option value="UZS">UZS - Uzbekistan Som (лв)</option>
+                    <option value="VES">VES - Venezuelan Bolívar (Bs.S)</option>
+                    <option value="VND">VND - Vietnamese Dong (₫)</option>
+                    <option value="VUV">VUV - Vanuatu Vatu (VT)</option>
+                    <option value="WST">WST - Samoan Tala (WS$)</option>
+                    <option value="XAF">XAF - Central African CFA Franc (FCFA)</option>
+                    <option value="XCD">XCD - East Caribbean Dollar ($)</option>
+                    <option value="XOF">XOF - West African CFA Franc (CFA)</option>
+                    <option value="XPF">XPF - CFP Franc (₣)</option>
+                    <option value="YER">YER - Yemeni Rial (﷼)</option>
+                    <option value="ZAR">ZAR - South African Rand (R)</option>
+                    <option value="ZMW">ZMW - Zambian Kwacha (ZK)</option>
+                    <option value="ZWL">ZWL - Zimbabwean Dollar ($)</option>
+                </select>
+            </div>
+
+            <div id="dynamicInputs"></div>
+
+            <button class="unicorn-btn" onclick="triggerAdAndCalculate()">🧮 Calculate Now</button>
+
+            <div class="adsense-box" style="margin-top: 20px;">
+                <span>[ Google AdSense In-Feed Ad Slot ]</span>
+            </div>
+        </div>
+
+        <!-- STEP 2: INTERSTITIAL AD VIEW -->
+        <div id="interstitialAdView" class="card">
+            <h1>Processing Calculation...</h1>
+            <p class="subtitle">Please wait while our secure financial engine compiles your live data.</p>
+            
+            <div class="spinner"></div>
+
+            <div class="ad-interstitial-box">
+                <p style="font-size: 0.7rem; text-transform: uppercase; color: #64748b; margin-bottom: 6px;">Sponsored Advertisement</p>
+                <h3 style="color: #f1f5f9; font-size: 1.1rem; margin-bottom: 4px;">Global Financial Solutions</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;">Optimize your cross-border portfolios and assets instantly.</p>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Generating your final results...</p>
+        </div>
+
+        <!-- STEP 3: FINAL RESULT VIEW -->
+        <div id="finalResultView" class="card">
+            <h1>Calculation Complete</h1>
+            <p class="subtitle" id="resultSubtitle">Computed successfully using real-time global benchmarks.</p>
+
+            <div class="result-display-box">
+                <span id="resultCategoryLabel" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em;">Final Output</span>
+                <h2 id="finalOutputValue">0.00</h2>
+            </div>
+
+            <div class="adsense-box" style="margin-top: 20px;">
+                <span>[ Google AdSense Result Banner Slot ]</span>
+            </div>
+
+            <button class="back-btn" onclick="resetToCalculator()">← Perform Another Calculation</button>
+        </div>
+
+        <!-- PRIVACY POLICY VIEW -->
+        <div id="privacyView" class="card" style="display: none;">
+            <h1>Privacy Policy & Compliance</h1>
+            <p class="subtitle">Last updated: November 2026</p>
+            
+            <div class="policy-content">
+                <p>Welcome to FinCalC. We respect your privacy and are fully committed to protecting your personal information while you use our high-utility calculation suite.</p>
+                
+                <h3>1. Information We Collect</h3>
+                <p>Our calculation tools operate entirely client-side within your web browser. Numeric values and inputs you provide are processed dynamically and are never stored or saved on any remote server.</p>
+
+                <h3>2. Third-Party Advertisements & Google AdSense</h3>
+                <p>We use third-party advertising companies, including <strong>Google AdSense</strong>, to serve targeted advertisements when you visit our website. Google uses cookies to serve ads based on your prior visits to this website and other sites across the Internet.</p>
+
+                <h3>3. Currency Conversion Disclosures</h3>
+                <p>Currency conversions and global economic evaluations are calculated using dynamic runtime valuation mappings benchmarked against standard baseline global exchange rates.</p>
+
+                <h3>4. Contact Us</h3>
+                <p>If you have any questions regarding this Privacy Policy, feel free to reach out via our administrative contact channels.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FinCalC. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const exchangeRates = {
+            USD: 1.0, INR: 93.00, EUR: 0.92, GBP: 0.79, CAD: 1.35, AUD: 1.52, JPY: 154.50, CHF: 0.88, CNY: 7.23, AED: 3.67,
+            AFN: 73.5, ALL: 95.2, AMD: 388.0, ANG: 1.79, AOA: 835.0, ARS: 1020.0, AWG: 1.79, AZN: 1.70, BAM: 1.80, BBD: 2.0,
+            BDT: 117.5, BGN: 1.80, BHD: 0.376, BIF: 2850.0, BMD: 1.0, BND: 1.34, BOB: 6.91, BRL: 5.45, BSD: 1.0, BTN: 83.2,
+            BWP: 13.5, BYN: 3.28, BZD: 2.0, CDF: 2800.0, CLP: 945.0, COP: 4100.0, CRC: 520.0, CUP: 24.0, CVE: 101.5, CZK: 23.2,
+            DJF: 177.7, DKK: 6.88, DOP: 60.0, DZD: 134.5, EGP: 48.5, ERN: 15.0, ETB: 114.0, FJD: 2.26, FKP: 0.79, GEL: 2.70,
+            GHS: 15.5, GIP: 0.79, GMD: 68.0, GNF: 8600.0, GTQ: 7.85, GYD: 209.0, HKD: 7.82, HNL: 24.7, HRK: 7.0, HTG: 132.0,
+            HUF: 365.0, IDR: 15900.0, ILS: 3.65, IQD: 1310.0, IRR: 42000.0, ISK: 138.0, JMD: 156.0, JOD: 0.709, KES: 129.0,
+            KGS: 89.5, KHR: 4050.0, KMF: 452.0, KPW: 900.0, KRW: 1380.0, KWD: 0.307, KYD: 0.833, KZT: 480.0, LAK: 25500.0,
+            LBP: 89500.0, LKR: 305.0, LRD: 195.0, LSL: 18.2, LYD: 4.85, MAD: 10.0, MDL: 17.8, MGA: 4600.0, MKD: 56.5,
+            MMK: 2100.0, MNT: 3450.0, MOP: 8.06, MRU: 39.8, MUR: 46.5, MVR: 15.4, MWK: 1730.0, MXN: 18.5, MYR: 4.70,
+            MZN: 63.9, NAD: 18.2, NGN: 1550.0, NIO: 36.8, NOK: 10.9, NPR: 133.0, NZD: 1.65, OMR: 0.385, PAB: 1.0, PEN: 3.75,
+            PGK: 3.95, PHP: 58.5, PKR: 278.0, PLN: 4.02, PYG: 7650.0, QAR: 3.64, RON: 4.58, RSD: 107.5, RUB: 92.0,
+            RWF: 1340.0, SAR: 3.75, SBD: 8.45, SCR: 13.8, SDG: 600.0, SEK: 10.6, SGD: 1.34, SHP: 0.79, SLL: 22500.0,
+            SOS: 571.0, SRD: 35.0, SSP: 1300.0, STN: 22.8, SYP: 13000.0, SZL: 18.2, THB: 36.5, TJS: 10.9, TMT: 3.50,
+            TND: 3.12, TOP: 2.38, TRY: 32.5, TTD: 6.80, TWD: 32.5, TZS: 2600.0, UAH: 41.2, UGX: 3750.0, UYU: 39.5,
+            UZS: 12700.0, VES: 36.5, VND: 25400.0, VUV: 120.0, WST: 2.75, XAF: 605.0, XCD: 2.70, XOF: 605.0, XPF: 110.0,
+            YER: 250.0, ZAR: 18.2, ZMW: 26.5, ZWL: 25.0
+        };
+
+        function switchTab(tab) {
+            const calcView = document.getElementById('calculatorView');
+            const adView = document.getElementById('interstitialAdView');
+            const resultView = document.getElementById('finalResultView');
+            const privacyView = document.getElementById('privacyView');
+            const navCalc = document.getElementById('navCalc');
+            const navPrivacy = document.getElementById('navPrivacy');
+
+            if(tab === 'calc') {
+                calcView.style.display = 'block';
+                adView.style.display = 'none';
+                resultView.style.display = 'none';
+                privacyView.style.display = 'none';
+                navCalc.classList.add('active');
+                navPrivacy.classList.remove('active');
+            } else {
+                calcView.style.display = 'none';
+                adView.style.display = 'none';
+                resultView.style.display = 'none';
+                privacyView.style.display = 'block';
+                navPrivacy.classList.add('active');
+                navCalc.classList.remove('active');
+            }
+        }
+
+        function updateFields() {
+            const field = document.getElementById('calcField').value;
+            const container = document.getElementById('dynamicInputs');
+
+            if (field === 'salary') {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label>Hourly Wage</label>
+                        <input type="number" id="val1" value="25">
+                    </div>
+                    <div class="input-group">
+                        <label>Hours Worked Per Week</label>
+                        <input type="number" id="val2" value="40">
+                    </div>
+                `;
+            } else if (field === 'compound') {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label>Initial Principal Investment</label>
+                        <input type="number" id="val1" value="5000">
+                    </div>
+                    <div class="input-group">
+                        <label>Monthly Contribution</label>
+                        <input type="number" id="val2" value="300">
+                    </div>
+                    <div class="input-group">
+                        <label>Time Horizon (Years)</label>
+                        <input type="number" id="val3" value="10">
+                    </div>
+                    <div class="input-group">
+                        <label>Estimated Annual Interest Rate (%)</label>
+                        <input type="number" id="val4" value="8" step="0.5">
+                    </div>
+                `;
+            } else if (field === 'loan') {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label>Loan Amount</label>
+                        <input type="number" id="val1" value="200000">
+                    </div>
+                    <div class="input-group">
+                        <label>Annual Interest Rate (%)</label>
+                        <input type="number" id="val2" value="6.5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Loan Term (Years)</label>
+                        <input type="number" id="val3" value="30">
+                    </div>
+                `;
+            }
+        }
+
+        function triggerAdAndCalculate() {
+            document.getElementById('calculatorView').style.display = 'none';
+            document.getElementById('interstitialAdView').style.display = 'block';
+
+            setTimeout(() => {
+                processCalculationAndShowResult();
+            }, 2000);
+        }
+
+        function processCalculationAndShowResult() {
+            const field = document.getElementById('calcField').value;
+            const currencyCode = document.getElementById('targetCurrency').value;
+            const rateMultiplier = exchangeRates[currencyCode] || 1.0;
+
+            let rawInput1 = parseFloat(document.getElementById('val1').value) || 0;
+            let input1InUSD = rawInput1 / rateMultiplier;
+
+            let baseUSDResult = 0;
+            let labelText = "";
+
+            if (field === 'salary') {
+                let hours = parseFloat(document.getElementById('val2').value) || 0;
+                baseUSDResult = input1InUSD * hours * 52;
+                labelText = "Estimated Annual Take-Home Salary";
+            } 
+            else if (field === 'compound') {
+                let PMT_in_USD = (parseFloat(document.getElementById('val2').value) || 0) / rateMultiplier;
+                let t = parseFloat(document.getElementById('val3').value) || 0;
+                let r = (parseFloat(document.getElementById('val4').value) || 0) / 100;
+                let n = 12;
+                let total = input1InUSD * Math.pow(1 + r/n, n * t);
+                for (let i = 1; i <= t * n; i++) {
+                    total += PMT_in_USD * Math.pow(1 + r/n, (t * n) - i);
+                }
+                baseUSDResult = total;
+                labelText = "Projected Future Wealth Accumulation";
+            }
+            else if (field === 'loan') {
+                let monthlyRate = (parseFloat(document.getElementById('val2').value) || 0) / 100 / 12;
+                let numberOfPayments = (parseFloat(document.getElementById('val3').value) || 0) * 12;
+                
+                let emi = 0;
+                if (monthlyRate > 0) {
+                    emi = (input1InUSD * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+                } else {
+                    emi = input1InUSD / numberOfPayments;
+                }
+                baseUSDResult = emi;
+                labelText = "Estimated Monthly Loan Payment (EMI)";
+            }
+
+            let finalConvertedValue = baseUSDResult * rateMultiplier;
+
+            document.getElementById('interstitialAdView').style.display = 'none';
+            document.getElementById('finalResultView').style.display = 'block';
+            document.getElementById('resultCategoryLabel').innerText = labelText + ` (${currencyCode})`;
+            document.getElementById('finalOutputValue').innerText = currencyCode + ' ' + Math.round(finalConvertedValue).toLocaleString();
+        }
+
+        function resetToCalculator() {
+            document.getElementById('finalResultView').style.display = 'none';
+            document.getElementById('calculatorView').style.display = 'block';
+        }
+
+        updateFields();
+    </script>
+</body>
+</html>
